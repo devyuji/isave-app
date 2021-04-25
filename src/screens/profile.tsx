@@ -107,10 +107,15 @@ function Profile() {
             >
               <Avatar.Image size={120} source={{ uri: DATA.profile_image }} />
               <View>
-                <Text style={styles.profileText}>
-                  Name : {DATA.name ? DATA.name : "N/A"}
+                <Text style={styles.profileText} numberOfLines={1}>
+                  Name :{" "}
+                  {DATA.name
+                    ? DATA.name.length > 20
+                      ? DATA.name.slice(0, 20) + "..."
+                      : DATA.name
+                    : "N/A"}
                 </Text>
-                <Text style={styles.profileText}>
+                <Text style={styles.profileText} numberOfLines={1}>
                   Username : {DATA.username}
                 </Text>
                 <Text style={styles.profileText}>
@@ -132,7 +137,7 @@ function Profile() {
           </Surface>
         </View>
       ) : (
-        <Info text="Enter instagram username" />
+        <Info />
       )}
     </ScrollView>
   );

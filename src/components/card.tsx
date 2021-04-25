@@ -11,14 +11,9 @@ interface CardProps {
   data: any;
 }
 
-const randomNumber = (): string | number => {
-  let i: number;
-  let num: string | number = "";
-  for (i = 1; i <= 3; i++) {
-    num = num + Math.floor(Math.random() * (10 - 0)) + 0;
-  }
-
-  return num;
+const randomNumber = (): number => {
+  const date = new Date();
+  return date.getTime();
 };
 
 const downloadImage = async (url: string) => {
@@ -30,7 +25,7 @@ const downloadImage = async (url: string) => {
     FileSystem.downloadAsync(url, FileSystem.documentDirectory + fileName)
       .then(({ uri }) => {
         MediaLibrary.saveToLibraryAsync(uri);
-        flashMessage("Download completed");
+        flashMessage("Saved to gallery");
       })
       .catch((error) => {
         console.error(error);
@@ -49,7 +44,7 @@ const downloadVideo = async (url: string) => {
     FileSystem.downloadAsync(url, FileSystem.documentDirectory + fileName)
       .then(({ uri }) => {
         MediaLibrary.saveToLibraryAsync(uri);
-        flashMessage("Download completed");
+        flashMessage("Saved to gallery");
       })
       .catch((error) => {
         console.error(error);
@@ -71,24 +66,21 @@ function Card({ data }: CardProps) {
       />
     );
   } else if (data.type === "slide") {
-    return data.links.map((d: any, index: number) => {
-      if (d.type === "image")
-        return <ImageCard image={d.image_url} index={index} />;
-      else if (d.type === "video")
-        return (
-          <VideoCard
-            video_img={d.video_img}
-            video_url={d.video}
-            index={index}
-          />
-        );
-    });
+    return data.links.map((d: any, index: number) =>
+      d.type === "image" ? (
+        <ImageCard image={d.image_url} index={index} />
+      ) : (
+        <VideoCard video_img={d.video_img} video_url={d.video} index={index} />
+      )
+    );
   }
+
+  return null;
 }
 
 const ImageCard = ({ image, index }: { image: string; index: number }) => {
   return (
-    <Surface style={styles.surface} key={index * 2}>
+    <Surface style={styles.surface} key={index}>
       <View style={styles.container}>
         <Image
           source={{

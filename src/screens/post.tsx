@@ -32,7 +32,7 @@ function Post() {
         setData(data);
       } catch (err) {
         setPrevText("");
-        alert(err);
+        alert("Check Account Type Maybe Its A Private Account Try Again Later");
       }
       setLoading(false);
     }
@@ -60,11 +60,7 @@ function Post() {
       </View>
 
       <View style={styles.cardContainer}>
-        {DATA ? (
-          <Card data={DATA} />
-        ) : (
-          <Info text="Copy the post url and paste it." />
-        )}
+        {DATA ? <Card data={DATA} /> : <Info />}
       </View>
     </ScrollView>
   );

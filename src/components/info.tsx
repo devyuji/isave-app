@@ -1,22 +1,18 @@
 import React from "react";
 import { View, Text } from "react-native";
 
-interface InfoProps {
-  text: string;
-}
-
-function Info({ text }: InfoProps) {
+function Info() {
   return (
     <View style={{ marginTop: "30%" }}>
       <Text
         style={{
           fontFamily: "regular",
-          fontSize: 17,
+          fontSize: 18,
           textTransform: "capitalize",
           textAlign: "center",
         }}
       >
-        {text}
+        isave doesn't required your Instagram credencials.
       </Text>
     </View>
   );
