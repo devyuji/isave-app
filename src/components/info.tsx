@@ -12,7 +12,7 @@ function Info() {
           textAlign: "center",
         }}
       >
-        isave doesn't required your Instagram login credencials.
+        isave doesn't require your Instagram login credentials.
       </Text>
     </View>
   );
