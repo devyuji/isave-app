@@ -12,6 +12,7 @@ function Post() {
   const [prevText, setPrevText] = useState<string>("");
   const [DATA, setData] = useState<any>();
   const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState<boolean>(false);
 
   const similarUrlCheck = (): boolean => {
     if (text === prevText) {
@@ -21,8 +22,21 @@ function Post() {
     return true;
   };
 
+  const urlChecker = (): boolean => {
+    const p = new RegExp("(https?://(?:www.)?instagram.com/p/([^/?#&]+)).*");
+    const tv = new RegExp("(https?://(?:www.)?instagram.com/tv/([^/?#&]+)).*");
+    const reel = new RegExp(
+      "(https?://(?:www.)?instagram.com/reel/([^/?#&]+)).*"
+    );
+
+    if (text.match(p) || text.match(tv) || text.match(reel)) return true;
+
+    return false;
+  };
+
   const fetchApi = async () => {
-    if (text && similarUrlCheck()) {
+    if (text && urlChecker() && similarUrlCheck()) {
+      setError(false);
       setLoading(true);
       try {
         const { data } = await axios.post("/post", {
@@ -35,6 +49,8 @@ function Post() {
         alert("Check Account Type Maybe Its A Private Account Try Again Later");
       }
       setLoading(false);
+    } else {
+      setError(true);
     }
   };
   return (
@@ -47,6 +63,7 @@ function Post() {
           onChangeText={(text) => setText(text)}
           selectionColor="#bbbfca"
           style={{ backgroundColor: "#fff" }}
+          error={error}
         />
         <Button
           mode="contained"

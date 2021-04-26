@@ -8,6 +8,20 @@ Instagram tool to download images, videos, reels, and profile pic in one place
 
 [Web Version](https://github.com/devyuji/isave)
 
+## Features
+
+- Download Images
+- Download Videos
+- Download Reels
+- Download Profile Picture
+- Download Stories (Not yet added coming soon)
+
+## Screenshots
+
+![](/assets/screenshots/image1.png)
+
+![](/assets/screenshots/image2.png)
+
 ## Installation
 
 ```bash

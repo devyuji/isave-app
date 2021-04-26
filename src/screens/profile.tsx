@@ -43,14 +43,9 @@ function Profile() {
     }
   };
 
-  const randomNumber = (): string | number => {
-    let i: number;
-    let num: string | number = "";
-    for (i = 1; i <= 3; i++) {
-      num = num + Math.floor(Math.random() * (10 - 0)) + 0;
-    }
-
-    return num;
+  const randomNumber = (): number => {
+    const date = new Date();
+    return date.getTime();
   };
 
   const downloadImage = async (url: string) => {
@@ -62,7 +57,7 @@ function Profile() {
       FileSystem.downloadAsync(url, FileSystem.documentDirectory + fileName)
         .then(({ uri }) => {
           MediaLibrary.saveToLibraryAsync(uri);
-          flashMessage("Download completed");
+          flashMessage("saved to gallery");
         })
         .catch((error) => {
           console.error(error);

@@ -11,6 +11,17 @@ interface CardProps {
   data: any;
 }
 
+interface ImageCardProps {
+  image: string;
+  index: number;
+}
+
+interface VideoCardProps {
+  video_img: string;
+  video_url: string;
+  index: number;
+}
+
 const randomNumber = (): number => {
   const date = new Date();
   return date.getTime();
@@ -78,7 +89,7 @@ function Card({ data }: CardProps) {
   return null;
 }
 
-const ImageCard = ({ image, index }: { image: string; index: number }) => {
+const ImageCard = ({ image, index }: ImageCardProps) => {
   return (
     <Surface style={styles.surface} key={index}>
       <View style={styles.container}>
@@ -102,15 +113,7 @@ const ImageCard = ({ image, index }: { image: string; index: number }) => {
   );
 };
 
-const VideoCard = ({
-  video_img,
-  video_url,
-  index,
-}: {
-  video_img: string;
-  video_url: string;
-  index: number;
-}) => {
+const VideoCard = ({ video_img, video_url, index }: VideoCardProps) => {
   return (
     <Surface style={styles.surface} key={index}>
       <View style={styles.container}>
