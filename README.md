@@ -18,11 +18,11 @@ Instagram tool to download images, videos, reels, and profile pic in one place
 
 ## Screenshots
 
-![<img src="/assets/screenshots/image1.png"
+[<img src="/assets/screenshots/image1.png"
     alt="Post section"
     height="256">](/assets/screenshots/image1.png)
 
-![<img src="/assets/screenshots/image2.png"
+[<img src="/assets/screenshots/image2.png"
     alt="Profile section"
     height="256">](/assets/screenshots/image2.png)
 
