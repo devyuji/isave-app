@@ -1,7 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import { View, Text } from "react-native";
 
-function Info() {
+interface InfoProps {
+  text: string;
+}
+
+const Info: FC<InfoProps> = ({ text }) => {
   return (
     <View style={{ marginTop: "30%" }}>
       <Text
@@ -12,10 +16,10 @@ function Info() {
           textAlign: "center",
         }}
       >
-        isave doesn't require your Instagram login credentials.
+        {text}
       </Text>
     </View>
   );
-}
+};
 
 export default Info;

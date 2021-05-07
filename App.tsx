@@ -1,5 +1,5 @@
 import { StatusBar } from "expo-status-bar";
-import React from "react";
+import React, { FC } from "react";
 import { StyleSheet } from "react-native";
 import { Provider as PaperProvider } from "react-native-paper";
 import { useFonts } from "expo-font";
@@ -14,7 +14,7 @@ import axios from "axios";
 
 const Tab = createMaterialTopTabNavigator();
 
-function App() {
+const App: FC = () => {
   axios.defaults.baseURL = "http://192.168.43.106:5001/api";
 
   const [loaded] = useFonts({
@@ -46,6 +46,8 @@ function App() {
             labelStyle: {
               fontFamily: "semi_bold",
             },
+            activeTintColor: "#7300BF",
+            inactiveTintColor: "#BEC7C7",
           }}
           backBehavior="none"
         >
@@ -56,7 +58,7 @@ function App() {
       <StatusBar style="dark" />
     </PaperProvider>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {

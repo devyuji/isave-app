@@ -1,8 +1,11 @@
-import React from "react";
+import React, { FC } from "react";
 import { Image, StyleSheet, View } from "react-native";
 import { Button, Surface } from "react-native-paper";
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
+
+// icons
+import { Feather } from "@expo/vector-icons";
 
 // utils
 import { flashMessage } from "../utils/flashMessage";
@@ -11,15 +14,13 @@ interface CardProps {
   data: any;
 }
 
-interface ImageCardProps {
+interface CardImageProps {
   image: string;
-  index: number;
 }
 
-interface VideoCardProps {
+interface CardVideoProps {
   video_img: string;
   video_url: string;
-  index: number;
 }
 
 const randomNumber = (): number => {
@@ -65,34 +66,36 @@ const downloadVideo = async (url: string) => {
   }
 };
 
-function Card({ data }: CardProps) {
+const Card: FC<CardProps> = ({ data }) => {
   if (data.type === "image") {
-    return <ImageCard image={data.image_url} index={0} />;
+    return <CardImage image={data.image_url} />;
   } else if (data.type === "video") {
     return (
-      <VideoCard
+      <CardVideo
         video_img={data.links[0].video_img}
         video_url={data.links[0].video}
-        index={0}
       />
     );
   } else if (data.type === "slide") {
     return data.links.map((d: any, index: number) =>
       d.type === "image" ? (
-        <ImageCard image={d.image_url} index={index} />
+        <CardImage image={d.image_url} key={index} />
       ) : (
-        <VideoCard video_img={d.video_img} video_url={d.video} index={index} />
+        <CardVideo video_img={d.video_img} video_url={d.video} key={index} />
       )
     );
   }
 
   return null;
-}
+};
 
-const ImageCard = ({ image, index }: ImageCardProps) => {
+const CardImage: FC<CardImageProps> = ({ image }) => {
   return (
-    <Surface style={styles.surface} key={index}>
-      <View style={styles.container}>
+    <Surface style={styles.surface}>
+      <View style={styles.logo}>
+        <Feather name="image" size={24} color="#06111C" />
+      </View>
+      <View>
         <Image
           source={{
             uri: image,
@@ -113,10 +116,13 @@ const ImageCard = ({ image, index }: ImageCardProps) => {
   );
 };
 
-const VideoCard = ({ video_img, video_url, index }: VideoCardProps) => {
+const CardVideo: FC<CardVideoProps> = ({ video_img, video_url }) => {
   return (
-    <Surface style={styles.surface} key={index}>
-      <View style={styles.container}>
+    <Surface style={styles.surface}>
+      <View style={styles.logo}>
+        <Feather name="video" size={24} color="black" />
+      </View>
+      <View>
         <Image
           source={{
             uri: video_img,
@@ -146,7 +152,10 @@ const styles = StyleSheet.create({
     width: "100%",
     backgroundColor: "#fff",
   },
-  container: {},
+  logo: {
+    marginLeft: "auto",
+    height: 30,
+  },
   image: {
     width: "100%",
     height: 300,

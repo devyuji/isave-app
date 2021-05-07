@@ -1,17 +1,16 @@
-import React, { useState } from "react";
-import { Text } from "react-native";
+import React, { FC, useState } from "react";
+import { Linking, Text, View } from "react-native";
 import { IconButton, Menu } from "react-native-paper";
-import * as WebBrowser from "expo-web-browser";
 
-function HeaderMenu() {
+const HeaderMenu: FC = () => {
   const [visible, setVisible] = useState<boolean>(false);
 
   const openMenu = () => setVisible(true);
 
   const closeMenu = () => setVisible(false);
 
-  const openBrowser = async (url: string) => {
-    await WebBrowser.openBrowserAsync(url);
+  const openBrowser = (url: string) => {
+    Linking.openURL(url);
   };
 
   return (
@@ -24,7 +23,7 @@ function HeaderMenu() {
       <Menu.Item
         onPress={() => openBrowser("https://isave.ga")}
         icon="web"
-        title="Web App"
+        title="Website"
       />
       <Menu.Item
         onPress={() => openBrowser("https://instagram.com/devyuji")}
@@ -39,6 +38,6 @@ function HeaderMenu() {
       <Text style={{ textAlign: "center", fontSize: 16 }}>Made by Yuji</Text>
     </Menu>
   );
-}
+};
 
 export default HeaderMenu;

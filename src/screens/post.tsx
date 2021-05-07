@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { FC, useState } from "react";
 import { ScrollView, StyleSheet, View } from "react-native";
 import { Button, TextInput } from "react-native-paper";
 
@@ -7,7 +7,7 @@ import { Button, TextInput } from "react-native-paper";
 import Card from "../components/card";
 import Info from "../components/info";
 
-function Post() {
+const Post: FC = () => {
   const [text, setText] = useState<string>("");
   const [prevText, setPrevText] = useState<string>("");
   const [DATA, setData] = useState<any>();
@@ -46,13 +46,14 @@ function Post() {
         setData(data);
       } catch (err) {
         setPrevText("");
-        alert("Check Account Type Maybe Its A Private Account Try Again Later");
+        alert("Something went wrong try again!");
       }
       setLoading(false);
     } else {
       setError(true);
     }
   };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.inputContainer}>
@@ -64,6 +65,8 @@ function Post() {
           selectionColor="#bbbfca"
           style={{ backgroundColor: "#fff" }}
           error={error}
+          autoCapitalize="none"
+          onSubmitEditing={fetchApi}
         />
         <Button
           mode="contained"
@@ -77,11 +80,11 @@ function Post() {
       </View>
 
       <View style={styles.cardContainer}>
-        {DATA ? <Card data={DATA} /> : <Info />}
+        {DATA ? <Card data={DATA} /> : <Info text="Just paste the url" />}
       </View>
     </ScrollView>
   );
-}
+};
 
 const styles = StyleSheet.create({
   container: {
