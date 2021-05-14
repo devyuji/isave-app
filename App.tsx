@@ -1,10 +1,9 @@
-import { StatusBar } from "expo-status-bar";
 import React, { FC } from "react";
-import { StyleSheet } from "react-native";
-import { Provider as PaperProvider } from "react-native-paper";
+import { DefaultTheme, Provider as PaperProvider } from "react-native-paper";
 import { useFonts } from "expo-font";
 import { NavigationContainer } from "@react-navigation/native";
 import { createMaterialTopTabNavigator } from "@react-navigation/material-top-tabs";
+import FlashMessage from "react-native-flash-message";
 
 // screens
 import Post from "./src/screens/post";
@@ -15,19 +14,29 @@ import axios from "axios";
 const Tab = createMaterialTopTabNavigator();
 
 const App: FC = () => {
-  axios.defaults.baseURL = "http://192.168.43.106:5001/api";
+  axios.defaults.baseURL = "https://shielded-basin-48291.herokuapp.com/api";
 
-  const [loaded] = useFonts({
+  const [fontLoaded] = useFonts({
     regular: require("./assets/fonts/Poppins-Regular.ttf"),
     semi_bold: require("./assets/fonts/Poppins-SemiBold.ttf"),
   });
 
-  if (!loaded) {
+  const theme = {
+    ...DefaultTheme,
+    roundness: 5,
+    colors: {
+      ...DefaultTheme.colors,
+      primary: "#000000",
+      accent: "#f1c40f",
+    },
+  };
+
+  if (!fontLoaded) {
     return null;
   }
 
   return (
-    <PaperProvider>
+    <PaperProvider theme={theme}>
       <Header />
       <NavigationContainer>
         <Tab.Navigator
@@ -38,7 +47,7 @@ const App: FC = () => {
               elevation: 0,
             },
             indicatorStyle: {
-              backgroundColor: "#7300BF",
+              backgroundColor: "#000000",
             },
             style: {
               elevation: 0,
@@ -46,7 +55,7 @@ const App: FC = () => {
             labelStyle: {
               fontFamily: "semi_bold",
             },
-            activeTintColor: "#7300BF",
+            activeTintColor: "#000000",
             inactiveTintColor: "#BEC7C7",
           }}
           backBehavior="none"
@@ -55,16 +64,9 @@ const App: FC = () => {
           <Tab.Screen name="Profile" component={Profile} />
         </Tab.Navigator>
       </NavigationContainer>
-      <StatusBar style="dark" />
+      <FlashMessage floating={true} position="bottom" />
     </PaperProvider>
   );
 };
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-  },
-});
 
 export default App;

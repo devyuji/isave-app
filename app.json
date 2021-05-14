@@ -2,12 +2,15 @@
   "expo": {
     "name": "isave",
     "slug": "isave",
-    "version": "1.0.2",
+    "version": "1.0.3",
     "orientation": "portrait",
     "primaryColor": "#ffffff",
     "scheme": "isave",
     "icon": "./assets/icon.png",
-    "userInterfaceStyle": "light",
+    "androidStatusBar": {
+      "barStyle": "light-content",
+      "translucent": false
+    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
@@ -26,7 +29,8 @@
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#FFFFFF"
       },
-      "package": "com.isave.app"
+      "package": "com.isave.app",
+      "versionCode": 1
     },
     "web": {
       "favicon": "./assets/favicon.png"

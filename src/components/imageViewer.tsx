@@ -31,7 +31,7 @@ const ImageViewer: FC<ImageViewerProps> = ({
     >
       <View style={styles.container}>
         <Pressable style={styles.close} onPress={onDismiss}>
-          <AntDesign name="closecircle" size={26} color="black" />
+          <AntDesign name="closecircle" size={26} color="white" />
         </Pressable>
         <Image
           source={{ uri: imageUrl }}
@@ -45,10 +45,10 @@ const ImageViewer: FC<ImageViewerProps> = ({
 
 const styles = StyleSheet.create({
   container: {
-    backgroundColor: "#fff",
     flex: 1,
     alignItems: "center",
     justifyContent: "center",
+    backgroundColor: "#000",
   },
   close: {
     position: "absolute",

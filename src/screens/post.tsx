@@ -6,6 +6,7 @@ import { Button, TextInput } from "react-native-paper";
 // components
 import Card from "../components/card";
 import Info from "../components/info";
+import { errorMessage } from "../utils/notification";
 
 const Post: FC = () => {
   const [text, setText] = useState<string>("");
@@ -46,7 +47,7 @@ const Post: FC = () => {
         setData(data);
       } catch (err) {
         setPrevText("");
-        alert("Something went wrong try again!");
+        errorMessage("Something went wrong try again");
       }
       setLoading(false);
     } else {

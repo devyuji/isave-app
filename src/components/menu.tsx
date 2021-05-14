@@ -1,5 +1,5 @@
 import React, { FC, useState } from "react";
-import { Linking, Text, View } from "react-native";
+import { Linking } from "react-native";
 import { IconButton, Menu } from "react-native-paper";
 
 const HeaderMenu: FC = () => {
@@ -26,16 +26,15 @@ const HeaderMenu: FC = () => {
         title="Website"
       />
       <Menu.Item
-        onPress={() => openBrowser("https://instagram.com/devyuji")}
-        icon="instagram"
-        title="Instagram"
-      />
-      <Menu.Item
         onPress={() => openBrowser("https://github.com/devyuji/isave-app")}
         icon="github"
         title="Github"
       />
-      <Text style={{ textAlign: "center", fontSize: 16 }}>Made by Yuji</Text>
+      <Menu.Item
+        onPress={() => openBrowser("https://instagram.com/devyuji")}
+        icon="instagram"
+        title="Instagram"
+      />
     </Menu>
   );
 };

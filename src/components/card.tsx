@@ -8,7 +8,7 @@ import * as MediaLibrary from "expo-media-library";
 import { Feather } from "@expo/vector-icons";
 
 // utils
-import { flashMessage } from "../utils/flashMessage";
+import { successMessage } from "../utils/notification";
 
 interface CardProps {
   data: any;
@@ -33,11 +33,12 @@ const downloadImage = async (url: string) => {
   mediaPermission = await MediaLibrary.getPermissionsAsync();
 
   if (mediaPermission.status === "granted") {
-    const fileName = "isave" + randomNumber() + ".jpg";
+    const fileName = "isave-" + randomNumber() + ".jpg";
     FileSystem.downloadAsync(url, FileSystem.documentDirectory + fileName)
-      .then(({ uri }) => {
-        MediaLibrary.saveToLibraryAsync(uri);
-        flashMessage("Saved to gallery");
+      .then(async ({ uri }) => {
+        await MediaLibrary.saveToLibraryAsync(uri);
+        successMessage("Image saved to gallery");
+        await FileSystem.deleteAsync(uri);
       })
       .catch((error) => {
         console.error(error);
@@ -52,11 +53,12 @@ const downloadVideo = async (url: string) => {
   mediaPermission = await MediaLibrary.getPermissionsAsync();
 
   if (mediaPermission.status === "granted") {
-    const fileName = "isave" + randomNumber() + ".mp4";
+    const fileName = "isave-" + randomNumber() + ".mp4";
     FileSystem.downloadAsync(url, FileSystem.documentDirectory + fileName)
-      .then(({ uri }) => {
-        MediaLibrary.saveToLibraryAsync(uri);
-        flashMessage("Saved to gallery");
+      .then(async ({ uri }) => {
+        await MediaLibrary.saveToLibraryAsync(uri);
+        successMessage("Video saved to gallery");
+        await FileSystem.deleteAsync(uri);
       })
       .catch((error) => {
         console.error(error);
@@ -148,7 +150,7 @@ const styles = StyleSheet.create({
     elevation: 3,
     padding: 8,
     borderRadius: 5,
-    marginBottom: 15,
+    marginBottom: 20,
     width: "100%",
     backgroundColor: "#fff",
   },
