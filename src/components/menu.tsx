@@ -21,7 +21,7 @@ const HeaderMenu: FC = () => {
       statusBarHeight={30}
     >
       <Menu.Item
-        onPress={() => openBrowser("https://isave.ga")}
+        onPress={() => openBrowser("https://isave.cc")}
         icon="web"
         title="Website"
       />

@@ -7,11 +7,13 @@ import {
   ScrollView,
   Pressable,
   Dimensions,
+  TextInput,
 } from "react-native";
-import { Avatar, Button, Surface, TextInput } from "react-native-paper";
+import { Avatar, Button, Surface } from "react-native-paper";
 import * as FileSystem from "expo-file-system";
 import * as MediaLibrary from "expo-media-library";
 import { StatusBar } from "expo-status-bar";
+import { Feather } from "@expo/vector-icons";
 
 // components
 import Info from "../components/info";
@@ -61,6 +63,7 @@ const Profile: FC = () => {
   const [DATA, setData] = useState<DATAProps>();
   const [loading, setLoading] = useState<boolean>(false);
   const [imageVisible, setImageVisible] = useState<boolean>(false);
+  const [showClearInputBtn, setShowClearInputBtn] = useState<boolean>(false);
 
   const similarUsernameCheck = (): boolean => {
     if (text === prevText) {
@@ -109,22 +112,39 @@ const Profile: FC = () => {
     setImageVisible(true);
   };
 
+  const input = (text: string) => {
+    setText(text);
+
+    if (text.length > 0) setShowClearInputBtn(true);
+    else setShowClearInputBtn(false);
+  };
+
   return (
     <>
       <ScrollView style={styles.container}>
-        <View style={styles.inputContainer}>
-          <TextInput
-            mode="outlined"
-            label="Enter username or paste the url"
-            value={text}
-            onChangeText={(text) => setText(text)}
-            selectionColor="#bbbfca"
-            style={{
-              backgroundColor: "#fff",
-            }}
-            autoCapitalize="none"
-            onSubmitEditing={fetchApi}
-          />
+        <View style={styles.inputOptions}>
+          <View style={styles.inputContainer}>
+            <TextInput
+              placeholder="Paste the profile url or enter the username"
+              value={text}
+              onChangeText={input}
+              selectionColor="#bbbfca"
+              style={styles.input}
+              autoCapitalize="none"
+              onSubmitEditing={fetchApi}
+            />
+            {showClearInputBtn && (
+              <Pressable
+                onPress={() => {
+                  setText("");
+                  setShowClearInputBtn(false);
+                }}
+                style={{ marginLeft: 5 }}
+              >
+                <Feather name="x" size={22} color="black" />
+              </Pressable>
+            )}
+          </View>
           <Button
             mode="contained"
             style={styles.btn}
@@ -165,10 +185,10 @@ const Profile: FC = () => {
                         : "N/A"}
                     </Text>
                     <Text style={styles.profileText}>
-                      Following : {DATA.following}
+                      Followers : {DATA.followers}
                     </Text>
                     <Text style={styles.profileText}>
-                      Followers : {DATA.followers}
+                      Following : {DATA.following}
                     </Text>
                   </View>
                 </View>
@@ -202,13 +222,17 @@ const styles = StyleSheet.create({
     backgroundColor: "#fff",
     flex: 1,
   },
-  inputContainer: {
+  inputOptions: {
     marginVertical: 20,
     paddingHorizontal: 20,
   },
-  btn: {
-    marginTop: 10,
-    elevation: 0,
+  inputContainer: {
+    flexDirection: "row",
+    alignItems: "center",
+    borderColor: "#000",
+    borderWidth: 2,
+    borderRadius: 5,
+    padding: 15,
   },
   cardContainer: {
     paddingHorizontal: 20,
@@ -217,7 +241,7 @@ const styles = StyleSheet.create({
   surface: {
     elevation: 3,
     padding: 8,
-    borderRadius: 5,
+    borderRadius: 10,
   },
   profileText: {
     fontFamily: "regular",
@@ -227,6 +251,21 @@ const styles = StyleSheet.create({
     flexDirection: "row",
     justifyContent: "space-between",
     marginTop: 20,
+  },
+  input: {
+    flex: 1,
+    fontSize: 14,
+    fontFamily: "regular",
+  },
+  btn: {
+    marginTop: 10,
+    elevation: 0,
+  },
+  btnText: {
+    color: "white",
+    textTransform: "uppercase",
+    letterSpacing: 2,
+    fontFamily: "semi_bold",
   },
 });
 

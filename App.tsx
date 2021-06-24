@@ -14,7 +14,7 @@ import axios from "axios";
 const Tab = createMaterialTopTabNavigator();
 
 const App: FC = () => {
-  axios.defaults.baseURL = "https://shielded-basin-48291.herokuapp.com/api";
+  axios.defaults.baseURL = "http://192.168.43.106:5001/api";
 
   const [fontLoaded] = useFonts({
     regular: require("./assets/fonts/Poppins-Regular.ttf"),
@@ -57,6 +57,7 @@ const App: FC = () => {
             },
             activeTintColor: "#000000",
             inactiveTintColor: "#BEC7C7",
+            showIcon: true,
           }}
           backBehavior="none"
         >

@@ -97,7 +97,7 @@ const CardImage: FC<CardImageProps> = ({ image }) => {
       <View style={styles.logo}>
         <Feather name="image" size={24} color="#06111C" />
       </View>
-      <View>
+      <View style={styles.imageContainer}>
         <Image
           source={{
             uri: image,
@@ -105,15 +105,15 @@ const CardImage: FC<CardImageProps> = ({ image }) => {
           style={styles.image}
           resizeMode="contain"
         />
-        <Button
-          icon="download"
-          onPress={() => downloadImage(image)}
-          mode="outlined"
-          style={{ marginTop: 10 }}
-        >
-          download
-        </Button>
       </View>
+      <Button
+        icon="download"
+        onPress={() => downloadImage(image)}
+        mode="outlined"
+        style={{ marginTop: 5 }}
+      >
+        download
+      </Button>
     </Surface>
   );
 };
@@ -125,18 +125,19 @@ const CardVideo: FC<CardVideoProps> = ({ video_img, video_url }) => {
         <Feather name="video" size={24} color="black" />
       </View>
       <View>
-        <Image
-          source={{
-            uri: video_img,
-          }}
-          style={styles.image}
-          resizeMode="contain"
-        />
+        <View style={styles.imageContainer}>
+          <Image
+            source={{
+              uri: video_img,
+            }}
+            style={styles.image}
+            resizeMode="contain"
+          />
+        </View>
         <Button
           icon="download"
           onPress={() => downloadVideo(video_url)}
           mode="outlined"
-          style={{ marginTop: 10 }}
         >
           download
         </Button>
@@ -149,19 +150,20 @@ const styles = StyleSheet.create({
   surface: {
     elevation: 3,
     padding: 8,
-    borderRadius: 5,
+    borderRadius: 10,
     marginBottom: 20,
     width: "100%",
     backgroundColor: "#fff",
   },
   logo: {
     marginLeft: "auto",
-    height: 30,
+  },
+  imageContainer: {
+    marginVertical: 5,
   },
   image: {
-    width: "100%",
+    flex: 1,
     height: 300,
-    borderRadius: 10,
   },
 });
 

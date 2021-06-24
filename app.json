@@ -2,15 +2,11 @@
   "expo": {
     "name": "isave",
     "slug": "isave",
-    "version": "1.0.3",
+    "version": "2.0.0",
     "orientation": "portrait",
     "primaryColor": "#ffffff",
     "scheme": "isave",
     "icon": "./assets/icon.png",
-    "androidStatusBar": {
-      "barStyle": "light-content",
-      "translucent": false
-    },
     "splash": {
       "image": "./assets/splash.png",
       "resizeMode": "contain",
