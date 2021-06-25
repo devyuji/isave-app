@@ -22,6 +22,9 @@ import ImageViewer from "../components/imageViewer";
 // utils
 import { successMessage } from "../utils/notification";
 
+// lib
+import { getClipboardData } from "../lib/clipboard";
+
 const randomNumber = (): number => {
   const date = new Date();
   return date.getTime();
@@ -119,6 +122,12 @@ const Profile: FC = () => {
     else setShowClearInputBtn(false);
   };
 
+  const setClipboard = async () => {
+    const res = await getClipboardData();
+    setText(res);
+    setShowClearInputBtn(true);
+  };
+
   return (
     <>
       <ScrollView style={styles.container}>
@@ -133,7 +142,7 @@ const Profile: FC = () => {
               autoCapitalize="none"
               onSubmitEditing={fetchApi}
             />
-            {showClearInputBtn && (
+            {showClearInputBtn ? (
               <Pressable
                 onPress={() => {
                   setText("");
@@ -142,6 +151,10 @@ const Profile: FC = () => {
                 style={{ marginLeft: 5 }}
               >
                 <Feather name="x" size={22} color="black" />
+              </Pressable>
+            ) : (
+              <Pressable onPress={setClipboard} style={{ marginLeft: 5 }}>
+                <Feather name="link-2" color="black" size={22} />
               </Pressable>
             )}
           </View>

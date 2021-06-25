@@ -13,7 +13,12 @@ import { Feather } from "@expo/vector-icons";
 // components
 import Card from "../components/card";
 import Info from "../components/info";
+
+// utils
 import { errorMessage } from "../utils/notification";
+
+// lib
+import { getClipboardData } from "../lib/clipboard";
 
 const Post: FC = () => {
   const [text, setText] = useState<string>("");
@@ -66,6 +71,12 @@ const Post: FC = () => {
     else setShowClearInputBtn(false);
   };
 
+  const setClipboard = async () => {
+    const res = await getClipboardData();
+    setText(res);
+    setShowClearInputBtn(true);
+  };
+
   return (
     <ScrollView style={styles.container}>
       <View style={styles.inputOptions}>
@@ -79,7 +90,7 @@ const Post: FC = () => {
             autoCapitalize="none"
             onSubmitEditing={fetchApi}
           />
-          {showClearInputBtn && (
+          {showClearInputBtn ? (
             <Pressable
               onPress={() => {
                 setText("");
@@ -88,6 +99,10 @@ const Post: FC = () => {
               style={{ marginLeft: 5 }}
             >
               <Feather name="x" size={22} color="black" />
+            </Pressable>
+          ) : (
+            <Pressable onPress={setClipboard} style={{ marginLeft: 5 }}>
+              <Feather name="link-2" size={22} color="black" />
             </Pressable>
           )}
         </View>
