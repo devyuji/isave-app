@@ -72,12 +72,7 @@ const Card: FC<CardProps> = ({ data }) => {
   if (data.type === "image") {
     return <CardImage image={data.image_url} />;
   } else if (data.type === "video") {
-    return (
-      <CardVideo
-        video_img={data.links[0].video_img}
-        video_url={data.links[0].video}
-      />
-    );
+    return <CardVideo video_img={data.video_img} video_url={data.video} />;
   } else if (data.type === "slide") {
     return data.links.map((d: any, index: number) =>
       d.type === "image" ? (

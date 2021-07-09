@@ -20,7 +20,7 @@ import Info from "../components/info";
 import ImageViewer from "../components/imageViewer";
 
 // utils
-import { successMessage } from "../utils/notification";
+import { errorMessage, successMessage } from "../utils/notification";
 
 // lib
 import { getClipboardData } from "../lib/clipboard";
@@ -101,7 +101,7 @@ const Profile: FC = () => {
         setData(data);
       } catch (err) {
         setPrevText("");
-        alert("no user found!");
+        errorMessage("No user found!");
       }
       setLoading(false);
     }

@@ -19,6 +19,7 @@ import { errorMessage } from "../utils/notification";
 
 // lib
 import { getClipboardData } from "../lib/clipboard";
+import { instagramUrlParser } from "../lib/instagramPostParser";
 
 const Post: FC = () => {
   const [text, setText] = useState<string>("");
@@ -49,10 +50,11 @@ const Post: FC = () => {
 
   const fetchApi = async () => {
     if (text && urlChecker() && similarUrlCheck()) {
+      const id = instagramUrlParser(text);
       setLoading(true);
       try {
         const { data } = await axios.post("/post", {
-          url: text,
+          id,
         });
         setPrevText(text);
         setData(data);

@@ -14,7 +14,7 @@ import axios from "axios";
 const Tab = createMaterialTopTabNavigator();
 
 const App: FC = () => {
-  axios.defaults.baseURL = "http://localhost:5001/api";
+  axios.defaults.baseURL = "http://localhost:5001";
 
   const [fontLoaded] = useFonts({
     regular: require("./assets/fonts/Poppins-Regular.ttf"),
