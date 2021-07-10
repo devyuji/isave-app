@@ -6,7 +6,7 @@ Instagram tool to download images, videos, reels, and profile pic in one place
 
 [Try out the app](https://github.com/devyuji/isave-app/releases)
 
-[Web Version](https://github.com/devyuji/isave)
+[Web Version](https://github.com/devyuji/isave-nextjs)
 
 ## Features
 
