@@ -2,6 +2,8 @@
 
 Instagram tool to download images, videos, reels, and profile pic in one place
 
+**This App is being deprecated to get future update download the flutter version**
+
 # DEMO
 
 [Try out the app](https://github.com/devyuji/isave-app/releases)
